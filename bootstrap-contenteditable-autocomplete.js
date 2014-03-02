@@ -7,7 +7,7 @@
   //
   var ContenteditableAutocomplete = function (el) {
     var $container, $input, $suggestions;
-    var currentValue;
+    var currentValue, currentSuggestions;
 
     // multiple words?
     var isMultiple;
@@ -144,17 +144,28 @@
         return;
       }
 
-      suggestions.forEach(function(suggestion, index) {
-        var label = suggestion.label || suggestion;
-        var value = suggestion.value || suggestion;
+      currentSuggestions = suggestions.map( normalizeSuggestion );
+
+      currentSuggestions.forEach(function(suggestion, index) {
+        var label = suggestion.label;
         var highlight = (index === 0) ? ' class="highlight"' : '';
 
         // select first result per default
-        html += '<div' + highlight + ' data-value="'+value+'">';
+        html += '<div' + highlight + '>';
         html += label.replace(regex, '<strong>$1</strong>');
         html += '</div>';
       });
       $suggestions.html(html).show();
+    }
+
+    //
+    function normalizeSuggestion (suggestion) {
+      if (typeof suggestion === 'string') {
+        return {
+          label: suggestion,
+          value: suggestion
+        };
+      }
     }
 
     //
@@ -181,12 +192,12 @@
     //
     function selectHighlightedSuggestion() {
       var $highlighted = $suggestions.find('.highlight');
-      var selected = $highlighted.data('value');
+      var selected = currentSuggestions[ $highlighted.index() ];
       if (isMultiple) {
-        replaceCurrentWordWith(selected);
+        replaceCurrentWordWith(selected.value);
       } else {
-        $input.text(selected).focus();
-        setCursorAt(selected.length);
+        $input.text(selected.value).focus();
+        setCursorAt(selected.value.length);
       }
 
       $input.trigger('autocomplete:select', [selected]);

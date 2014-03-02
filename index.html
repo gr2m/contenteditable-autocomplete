@@ -72,6 +72,21 @@
       add the <code>data-autocomplete-multiple</code> property to the tag.
     </p>
 
+    <p>To pass suggestions for the autocomplete, listen to the <code>autocomplete:request</code> event</p>
+
+    <pre>$('[name=country]').on('autocomplete:request', function(event, query, callback) {
+  var suggestions = getSuggestionsArrayFor(query);
+  callback(suggestions);
+})</pre>
+
+    <p>
+      To react on when a suggestion has been selected, listen to the <code>autocomplete:select</code> event.
+    </p>
+
+    <pre>$('[name=country]').on('autocomplete:select', function(event, selected) {
+  console.log('selected item:', selected);
+})</pre>
+
     <p class="info">
       <strong>Note:</strong> This demo is using the <a href="https://github.com/gr2m/bootstrap-expandable-input">Bootstrap Expandable Input</a>
       plugin for placeholder support in <code>&lt;span contenteditable placeholder="Your name here"&gt;</code> fields.
@@ -142,6 +157,9 @@
       callback(countries.filter(function(country) {
         return country.toLowerCase().indexOf(query) !== -1;
       }));
+    });
+    $(document.body).on('autocomplete:select', function(event, selected) {
+      console.log('autocomplete:select', selected)
     });
   </script>
 </body>
