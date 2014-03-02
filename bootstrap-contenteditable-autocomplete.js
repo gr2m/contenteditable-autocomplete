@@ -39,6 +39,7 @@
       $input.on('input', handleInput);
       $input.on('keydown', handleKeydown);
       $input.on('blur', handleBlur);
+      $suggestions.on('mousedown touchstart', '> div', handleSuggestionClick);
     }
 
 
@@ -125,6 +126,15 @@
       if (isMultiple) removeTrailingComma();
     }
 
+    //
+    function handleSuggestionClick (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      selectSuggestionByElement( $(event.currentTarget) );
+      $suggestions.hide();
+    }
+
 
     // Internal Methods
     // ----------------
@@ -205,7 +215,13 @@
     //
     function selectHighlightedSuggestion() {
       var $highlighted = $suggestions.find('.highlight');
-      var selected = currentSuggestions[ $highlighted.index() ];
+      selectSuggestionByElement($highlighted);
+    }
+
+    //
+    function selectSuggestionByElement($element) {
+      debugger
+      var selected = currentSuggestions[ $element.index() ];
       if (isMultiple) {
         replaceCurrentWordWith(selected.value);
       } else {

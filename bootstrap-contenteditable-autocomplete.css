@@ -21,9 +21,11 @@
 
 [data-autocomplete] .suggestions > div {
   padding: 4px 7px;
+  cursor: pointer;
 }
 
-[data-autocomplete] .suggestions > div.highlight {
+[data-autocomplete] .suggestions > div.highlight,
+[data-autocomplete] .suggestions > div:hover {
   background: #0A5CB4;
   color: #fff;
 }
