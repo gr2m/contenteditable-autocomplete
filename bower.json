@@ -1,0 +1,29 @@
+{
+  "name": "bootstrap-contenteditable-autocomplete",
+  "version": "0.0.5",
+  "authors": [
+    "Gregor Martynus <gregor@martynus.net>"
+  ],
+  "description": "Add Autocomplete/Typeahead to an expandable input (see bootstrap-contenteditable)",
+  "main": [
+    "bootstrap-contenteditable-autocomplete.js",
+    "bootstrap-contenteditable-autocomplete.css"
+  ],
+  "keywords": [
+    "bootstrap",
+    "plugin",
+    "autocomplete",
+    "typeahead"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.1.0",
+    "bootstrap-expandable-input": "~0.0.6"
+  }
+}

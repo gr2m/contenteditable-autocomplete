@@ -1,0 +1,33 @@
+[data-autocomplete] {
+  position: relative;
+}
+
+[data-autocomplete] .suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  border: 1px solid #ccc;
+  border-top: 0;
+
+  background: #fff;
+  z-index: 2;
+  white-space: nowrap;
+  font-size: 13px;
+  font-family: Helvetica, Arial;
+  font-weight: normal;
+  line-height: 18px;
+}
+
+[data-autocomplete] .suggestions > div {
+  padding: 4px 7px;
+}
+
+[data-autocomplete] .suggestions > div.highlight {
+  background: #0A5CB4;
+  color: #fff;
+}
+
+[data-autocomplete] .suggestions > div strong {
+  font-weight: bold;
+}
