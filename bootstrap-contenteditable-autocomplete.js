@@ -7,7 +7,7 @@
   //
   var ContenteditableAutocomplete = function (el) {
     var $container, $input, $suggestions;
-    var currentValue, currentSuggestions;
+    var currentValue, currentValues, currentSuggestions;
 
     // multiple words?
     var isMultiple;
@@ -132,6 +132,7 @@
     //http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
     var regexEscapeLatters = /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g;
     var trailingCommaRegex = /[,\s]*$/;
+    var splitWordsWithWhitespaceRegex = /\s*,\s*/;
 
     //
     function handleNewSuggestions (suggestions) {
@@ -139,16 +140,19 @@
       var search = currentValue.replace(regexEscapeLatters, '\\$&');
       var regex = new RegExp('('+search+')', 'i');
 
-      if (suggestions.length === 0) {
+      currentValues = currentValue.trim().split(splitWordsWithWhitespaceRegex);
+      currentSuggestions = suggestions.map( normalizeSuggestion ).filter(newSuggestionsOnly);
+
+      if (currentSuggestions.length === 0) {
         $suggestions.hide();
         return;
       }
 
-      currentSuggestions = suggestions.map( normalizeSuggestion );
-
       currentSuggestions.forEach(function(suggestion, index) {
         var label = suggestion.label;
         var highlight = (index === 0) ? ' class="highlight"' : '';
+
+        if (! label) return;
 
         // select first result per default
         html += '<div' + highlight + '>';
@@ -159,13 +163,22 @@
     }
 
     //
+    function newSuggestionsOnly (suggestion) {
+      if (! suggestion) return;
+      return currentValues.indexOf(suggestion.value) === -1;
+    }
+
+    //
     function normalizeSuggestion (suggestion) {
+      if (! suggestion) return;
       if (typeof suggestion === 'string') {
         return {
           label: suggestion,
           value: suggestion
         };
       }
+
+      return suggestion;
     }
 
     //
