@@ -30,9 +30,6 @@
       $suggestions.append('<div>Suggestion 1</div><div>Suggestion 2</div><div>Suggestion 3</div>');
       $suggestions.hide();
 
-      // wrap input into container
-      $input.after($container).appendTo($container);
-
       isMultiple = $input.is('[data-autocomplete-multiple]');
 
       $input.on('focus', handleFocus);
@@ -40,6 +37,17 @@
       $input.on('keydown', handleKeydown);
       $input.on('blur', handleBlur);
       $suggestions.on('mousedown touchstart', '> div', handleSuggestionClick);
+
+      // wrap input into container. Use setTimeout to prevent
+      // blur event to be triggered before focus. Yeah it's odd.
+      // And as if that wouldn't be enough, the input looses focus
+      // when wrapped by $container, so we have to re-set the cursor
+      // position manually
+      setTimeout(function() {
+        var cursorPosition = getCaretCharacterOffsetWithin($input[0]);
+        $input.after($container).appendTo($container);
+        setCursorAt(cursorPosition);
+      });
     }
 
 
@@ -47,7 +55,7 @@
     // --------------
 
     //
-    function handleFocus ( /*event*/ ) {
+    function handleFocus () {
       currentValue = $input.text();
       if (isMultiple) addTrailingComma();
     }
@@ -220,7 +228,6 @@
 
     //
     function selectSuggestionByElement($element) {
-      debugger
       var selected = currentSuggestions[ $element.index() ];
       if (isMultiple) {
         replaceCurrentWordWith(selected.value);
@@ -235,7 +242,8 @@
     function setCursorAt (position) {
       var range = document.createRange();
       var sel = window.getSelection();
-      range.setStart($input[0].childNodes[0], position);
+      var $target = $input[0].childNodes.length ? $input[0].childNodes[0] : $input[0];
+      range.setStart($target, position);
       range.collapse(true);
       sel.removeAllRanges();
       sel.addRange(range);
@@ -279,8 +287,6 @@
       var word;
       var beforeQuery;
       var afterQuery;
-
-      console.log('cursorAt',cursorAt, currentValue[cursorAt-1]);
 
       for (var i = 0; i < words.length; i++) {
         word = words[i];
@@ -340,7 +346,7 @@
   // AUTOCOMPLETE PLUGIN DEFINITION
   // ==============================
 
-  $.fn.contenteditableAutocomplete = function () {
+  $.fn.contenteditableAutocomplete = function (/*option*/) {
     return this.each(function () {
       var $this = $(this);
       var api  = $this.data('bs.contenteditableAutocomplete');
@@ -358,12 +364,12 @@
   // =======================
 
   $(document).on('focus.bs.contenteditableautocomplete.data-api', '[data-autocomplete-spy]', function(event) {
+    var $input = $(event.currentTarget);
+
     event.preventDefault();
     event.stopImmediatePropagation();
-    $(event.currentTarget).contenteditableAutocomplete().removeAttr('data-autocomplete-spy');
 
-    // re-triggering event doesn't work here as we wrapped
-    // the input into a container
-    $(event.currentTarget).focus();
+    $input.removeAttr('data-autocomplete-spy').contenteditableAutocomplete();
+    $input.trigger( $.Event(event) );
   });
 })(jQuery);

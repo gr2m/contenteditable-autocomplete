@@ -162,7 +162,7 @@
   // EXPANDABLE INPUT DATA-API
   // =========================
 
-  $(document).on('focus.bs.expandableInput.data-api', '[contenteditable]', function(event) {
+  $(document.body).on('focus.bs.expandableInput.data-api', '[contenteditable]', function(event) {
     var $input = $(event.currentTarget);
 
     // already initialized? Stop here.
