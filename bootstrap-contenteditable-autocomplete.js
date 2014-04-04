@@ -242,8 +242,9 @@
     function setCursorAt (position) {
       var range = document.createRange();
       var sel = window.getSelection();
-      var $target = $input[0].childNodes.length ? $input[0].childNodes[0] : $input[0];
-      range.setStart($target, position);
+      var textNode = $input[0].childNodes.length ? $input[0].childNodes[0] : $input[0];
+      position = Math.min(textNode.length, position);
+      range.setStart(textNode, position);
       range.collapse(true);
       sel.removeAllRanges();
       sel.addRange(range);
@@ -329,14 +330,14 @@
       var currentValue = $input.text();
 
       if (currentValue) {
-        $input.html(currentValue.replace(trailingCommaRegex, ',&nbsp;'));
+        $input.val(currentValue.replace(trailingCommaRegex, ', '));
       }
     }
 
     //
     function removeTrailingComma () {
       var currentValue = $input.text();
-      $input.text(currentValue.replace(trailingCommaRegex, ''));
+      $input.val(currentValue.replace(trailingCommaRegex, ''));
     }
 
     initialize();
