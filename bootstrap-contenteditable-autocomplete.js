@@ -46,6 +46,7 @@
       setTimeout(function() {
         var cursorPosition = getCaretCharacterOffsetWithin($input[0]);
         $input.after($container).appendTo($container);
+        $input.focus();
         setCursorAt(cursorPosition);
       });
     }
