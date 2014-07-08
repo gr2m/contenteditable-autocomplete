@@ -65,8 +65,6 @@
       var newValue = $input.text();
       var query;
 
-      console.log('handleInput');
-
       if (! newValue.trim()) {
         $suggestions.hide();
         currentValue = newValue;
@@ -262,8 +260,6 @@
       var charCount = 0;
       var words = currentValue.split(splitWordsRegex);
       var word;
-
-      console.log('cursorAt',cursorAt, currentValue[cursorAt-1]);
 
       for (var i = 0; i < words.length; i++) {
         word = words[i];
