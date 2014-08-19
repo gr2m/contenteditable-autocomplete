@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-expandable-input",
-  "version": "0.0.6",
+  "version": "0.0.14",
   "authors": [
     "Gregor Martynus <gregor@martynus.net>"
   ],
@@ -26,14 +26,13 @@
     "bootstrap": "~3.1.0"
   },
   "homepage": "https://github.com/gr2m/bootstrap-expandable-input",
-  "_release": "0.0.6",
+  "_release": "0.0.14",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.6",
-    "commit": "a05aaeee3b5f72a8638a3517c0c68da258a2a86a"
+    "tag": "0.0.14",
+    "commit": "269f5495d6cada052a4460e09fc3eea0d3f987b7"
   },
   "_source": "git://github.com/gr2m/bootstrap-expandable-input.git",
-  "_target": "~0.0.6",
-  "_originalSource": "bootstrap-expandable-input",
-  "_direct": true
+  "_target": "~0.0.14",
+  "_originalSource": "bootstrap-expandable-input"
 }

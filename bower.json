@@ -24,6 +24,6 @@
   ],
   "devDependencies": {
     "bootstrap": "~3.1.0",
-    "bootstrap-expandable-input": "~0.0.6"
+    "bootstrap-expandable-input": "~0.0.14"
   }
 }

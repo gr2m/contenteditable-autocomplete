@@ -148,8 +148,9 @@
 
     //http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
     var regexEscapeLatters = /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g;
-    var trailingCommaRegex = /[,\s]*$/;
-    var splitWordsWithWhitespaceRegex = /\s*,\s*/;
+    var regexTrailingComma = /[,\s]*$/;
+    var regexSplitWordsWithWhitespace = /\s*,\s*/;
+
 
     //
     function handleNewSuggestions (suggestions) {
@@ -157,7 +158,7 @@
       var search = currentValue.replace(regexEscapeLatters, '\\$&');
       var regex = new RegExp('('+search+')', 'i');
 
-      currentValues = currentValue.trim().split(splitWordsWithWhitespaceRegex);
+      currentValues = currentValue.trim().split(regexSplitWordsWithWhitespace);
       currentSuggestions = suggestions.map( normalizeSuggestion ).filter(newSuggestionsOnly);
 
       if (currentSuggestions.length === 0) {
@@ -170,6 +171,8 @@
         var highlight = (index === 0) ? ' class="highlight"' : '';
 
         if (! label) return;
+
+        label = htmlEscape(label);
 
         // select first result per default
         html += '<div' + highlight + '>';
@@ -228,11 +231,12 @@
     //
     function selectSuggestionByElement($element) {
       var selected = currentSuggestions[ $element.index() ];
+      var value = selected.value;
       if (isMultiple) {
-        replaceCurrentWordWith(selected.value);
+        replaceCurrentWordWith(value);
       } else {
-        $input.text(selected.value).focus();
-        setCursorAt(selected.value.length);
+        $input.text(value).focus();
+        setCursorAt(value.length);
       }
 
       $input.trigger('autocomplete:select', [selected]);
@@ -295,7 +299,7 @@
         if (charCount + word.length >= cursorAt) {
           beforeQuery = currentValue.substring(0, charCount).trim();
           afterQuery = currentValue.substring(cursorAt);
-          $input.html(beforeQuery + ' ' + newWord + ',&nbsp;' + afterQuery);
+          $input.html(htmlEscape(beforeQuery + ' ' + newWord) + ',&nbsp;' + htmlEscape(afterQuery));
           setCursorAt( (beforeQuery + ' ' + newWord + ', ').length );
           return;
         }
@@ -327,14 +331,29 @@
       var currentValue = $input.text();
 
       if (currentValue) {
-        $input.val(currentValue.replace(trailingCommaRegex, ', '));
+        $input.val(currentValue.replace(regexTrailingComma, ', '));
       }
     }
 
     //
     function removeTrailingComma () {
       var currentValue = $input.text();
-      $input.val(currentValue.replace(trailingCommaRegex, ''));
+      $input.val(currentValue.replace(regexTrailingComma, ''));
+    }
+
+    //
+    var regexAmpersands = /&/g;
+    var regexSingleQuotes = /'/g;
+    var regexDoubleQuotes = /"/g;
+    var regexLessThanSigns = /</g;
+    var regexGreaterThanSigns = />/g;
+    function htmlEscape(string) {
+      return string
+        .replace(regexAmpersands, '&amp;')
+        .replace(regexSingleQuotes, '&#39;')
+        .replace(regexDoubleQuotes, '&quot;')
+        .replace(regexLessThanSigns, '&lt;')
+        .replace(regexGreaterThanSigns, '&gt;');
     }
 
     initialize();

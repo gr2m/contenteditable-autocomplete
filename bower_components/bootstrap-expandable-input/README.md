@@ -23,9 +23,9 @@ Usage
 <link rel="stylesheet" type="text/css" href="bootstrap.css">
 <script src="bootstrap.js"></script>
 
-<!-- load editable-table assets -->
-<link rel="stylesheet" type="text/css" href="bootstrap-expandable-inputs.css">
-<script src="bootstrap-expandable-inputs.js"></script>
+<!-- load expandable-input assets -->
+<link rel="stylesheet" type="text/css" href="bootstrap-expandable-input.css">
+<script src="bootstrap-expandable-input.js"></script>
 
 <!-- The behaviour is initialzied on first interaction -->
 <p>

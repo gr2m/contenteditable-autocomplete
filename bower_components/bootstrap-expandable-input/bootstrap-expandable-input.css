@@ -17,6 +17,14 @@ html body [contenteditable]:empty:before {
   content: attr(placeholder);
   color: #a9a9a9;
 }
+html body [contenteditable=false]:empty:before {
+  visibility: hidden !important;
+}
+@media print {
+  html body [contenteditable]:empty:before {
+    visibility: hidden !important;
+  }
+}
 
 html body [contenteditable].contenteditable-inline {
   display: inline-block;
@@ -28,4 +36,7 @@ html body [contenteditable].contenteditable-inline br {
 html body [contenteditable].contenteditable-inline:after {
   content: ' ';
   font-size: 0;
+  display: inline-block;
+  width: 0;
+  height: 0;
 }
