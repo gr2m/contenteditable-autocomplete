@@ -311,12 +311,13 @@
     }
 
     // http://stackoverflow.com/questions/4811822/get-a-ranges-start-and-end-offsets-relative-to-its-parent-container/4812022#4812022
+    // also: http://stackoverflow.com/questions/22935320/uncaught-indexsizeerror-failed-to-execute-getrangeat-on-selection-0-is-not
     function getCaretCharacterOffsetWithin(element) {
       var caretOffset = 0;
       var doc = element.ownerDocument || element.document;
       var win = doc.defaultView || doc.parentWindow;
       var range, preCaretRange;
-      if (typeof win.getSelection !== 'undefined') {
+      if (typeof win.getSelection !== 'undefined' && win.getSelection().rangeCount > 0) {
         range = win.getSelection().getRangeAt(0);
         preCaretRange = range.cloneRange();
         preCaretRange.selectNodeContents(element);
