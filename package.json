@@ -1,0 +1,21 @@
+{
+  "name": "contenteditable-autocomplete",
+  "description": "Autocomplete for contenteditable tags",
+  "main": "bootstrap-contenteditable-autocomplete.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gr2m/contenteditable-autocomplete.git"
+  },
+  "author": "Gregor Martynus <gregor@martynus.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gr2m/contenteditable-autocomplete/issues"
+  },
+  "homepage": "https://github.com/gr2m/contenteditable-autocomplete#readme"
+}
