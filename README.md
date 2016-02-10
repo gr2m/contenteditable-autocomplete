@@ -1,29 +1,43 @@
-Expandable Input Autocomplete – A bootstrap plugin
-==================================================
+# Expandable Input Autocomplete – A jQuery plugin
 
 > Add Autocomplete/Typeahead to contenteditable tag
 
 
-Installation
-------------
+## Download / Installation
 
-Simplest way to install is using [bower](http://bower.io/):
+You can download the latest JS & CSS code here:
+
+- https://npmcdn.com/contenteditable-autocomplete/dist/contenteditable-autocomplete.js
+- https://npmcdn.com/contenteditable-autocomplete/dist/contenteditable-autocomplete.css
+
+Or install via [npm](https://www.npmjs.com/)
 
 ```
-bower install --save bootstrap-contenteditable-autocomplete
+npm install --save contenteditable-autocomplete
 ```
 
-Usage
------
+The JS code can be required with
+
+```js
+var jQuery = require('jquery')
+var contenteditableAutocomplete = require('contenteditable-autocomplete')
+
+// init
+contenteditableAutocomplete(jQuery)
+```
+
+The CSS code lives at `node_modules/contenteditable-autocomplete/contenteditable-autocomplete.css`
+
+## Usage
 
 ```html
-<!-- load bootstrap assets -->
-<link rel="stylesheet" type="text/css" href="bootstrap.css">
-<script src="bootstrap.js"></script>
+<!-- load jquery -->
+<script src="jquery.js"></script>
+
 
 <!-- load contenteditable-autocomplete assets -->
-<link rel="stylesheet" type="text/css" href="bootstrap-contenteditable-autocomplete.css">
-<script src="bootstrap-contenteditable-autocomplete.js"></script>
+<link rel="stylesheet" type="text/css" href="contenteditable-autocomplete.css">
+<script src="contenteditable-autocomplete.js"></script>
 
 <!-- The behaviour is initialzied on first interaction -->
 <p>
@@ -74,8 +88,36 @@ Selected is always an object with `label` and `value` properties (see above). Ad
 properties passed to suggestions will be passed.
 
 
-Fine Print
-----------
+## Local Setup
+
+```bash
+git clone git@github.com:gr2m/contenteditable-autocomplete.git
+cd contenteditable-autocomplete
+npm install
+```
+
+## Test
+
+You can start a local dev server with
+
+```bash
+npm start
+```
+
+Run tests with
+
+```bash
+npm test
+```
+
+While working on the tests, you can start Selenium / Chrome driver
+once, and then tests re-run on each save
+
+```bash
+npm run test:mocha:watch
+```
+
+## Fine Print
 
 The Expandable Input Plugin have been authored by [Gregor Martynus](https://github.com/gr2m),
 proud member of the [Hoodie Community](http://hood.ie/).
