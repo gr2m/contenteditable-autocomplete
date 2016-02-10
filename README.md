@@ -2,6 +2,9 @@
 
 > Add Autocomplete/Typeahead to contenteditable tag
 
+[![Build Status](https://travis-ci.org/gr2m/contenteditable-autocomplete.svg)](https://travis-ci.org/gr2m/contenteditable-autocomplete)
+[![Dependency Status](https://david-dm.org/gr2m/contenteditable-autocomplete.svg)](https://david-dm.org/gr2m/contenteditable-autocomplete)
+[![devDependency Status](https://david-dm.org/gr2m/contenteditable-autocomplete/dev-status.svg)](https://david-dm.org/gr2m/contenteditable-autocomplete#info=devDependencies)
 
 ## Download / Installation
 
