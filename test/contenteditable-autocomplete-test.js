@@ -49,7 +49,7 @@ describe('=== expandable-input ===', function () {
     return this.client
       .click('[name="example-single"]')
       .keys('a')
-      .waitForVisible('.suggestions')
+      .waitForVisible('.suggestions', 3000)
       .isVisible('.suggestions').then(toValue)
       .then(function (isVisiable) {
         expect(isVisiable).to.equal(true)
