@@ -1,6 +1,6 @@
 {
   "name": "contenteditable-autocomplete",
-  "description": "A Bootstrap plugin to use <{span|div|...} contenteditable> as expandable inputs.",
+  "description": "A jQuery plugin to use <{span|div|...} contenteditable> as expandable inputs.",
   "main": "contenteditable-autocomplete.js",
   "files": [
     "contenteditable-autocomplete.js",
