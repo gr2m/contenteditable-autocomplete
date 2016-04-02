@@ -1,4 +1,4 @@
-# Expandable Input Autocomplete – A jQuery plugin
+# contenteditable-autocomplete
 
 > Add Autocomplete/Typeahead to contenteditable tag
 
