@@ -10,8 +10,8 @@
 
 You can download the latest JS & CSS code here:
 
-- https://npmcdn.com/contenteditable-autocomplete/dist/contenteditable-autocomplete.js
-- https://npmcdn.com/contenteditable-autocomplete/dist/contenteditable-autocomplete.css
+- https://unpkg.com/contenteditable-autocomplete/dist/contenteditable-autocomplete.js
+- https://unpkg.com/contenteditable-autocomplete/dist/contenteditable-autocomplete.css
 
 Or install via [npm](https://www.npmjs.com/)
 
